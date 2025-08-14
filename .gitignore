@@ -222,5 +222,8 @@ knowledge/*.index
 knowledge/*.pkl
 knowledge/*.bin
 
+# チャンクデータ（公開しない）
+chunks/
+
 # 画像や大容量ファイル（必要に応じて）
 images/
