@@ -86,7 +86,7 @@ export default function Home() {
           <div className="font-bold text-green-800 mb-2">根拠ナレッジ（上位{knowledge.length}件）</div>
           {knowledge.map(chunk => (
             <div key={chunk.rank} className="mb-4 border-b pb-2 last:border-b-0 last:pb-0">
-              <div className="font-semibold">[{chunk.rank}] {chunk.title} &lt;{chunk.category}&gt; (score: {chunk.score.toFixed(4)})</div>
+              <div className="font-semibold">[{chunk.rank}] {chunk.title} &lt;{chunk.category}&gt; (score: {typeof chunk.score === 'number' ? chunk.score.toFixed(4) : 'N/A'})</div>
               <div className="text-sm text-gray-700 mb-1">要約: {chunk.summary}</div>
               <div className="text-sm text-gray-600">本文: {chunk.content}</div>
             </div>
