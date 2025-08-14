@@ -205,3 +205,22 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Node.js/Next.js（フロントエンド）関連
+node_modules/
+.next/
+dist/
+
+# 機密情報（APIキーなど）
+.env
+backend/.env
+frontend/.env
+
+# ナレッジデータ（絶対に公開しない）
+knowledge/*.json
+knowledge/*.index
+knowledge/*.pkl
+knowledge/*.bin
+
+# 画像や大容量ファイル（必要に応じて）
+images/
