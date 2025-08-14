@@ -217,7 +217,7 @@ backend/.env
 frontend/.env
 
 # ナレッジデータ（絶対に公開しない）
-knowledge/*.json
+# knowledge/*.json
 knowledge/*.index
 knowledge/*.pkl
 knowledge/*.bin
