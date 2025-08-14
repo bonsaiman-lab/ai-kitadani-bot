@@ -39,7 +39,7 @@ export default function Home() {
       if (!res.ok) throw new Error("APIエラー: " + res.statusText);
       const data = await res.json();
       setAnswer(data.answer);
-      setKnowledge(data.knowledge);
+      setKnowledge(data.matched_chunk ? [data.matched_chunk] : []);
     } catch (err: any) {
       setError(err.message);
     } finally {
