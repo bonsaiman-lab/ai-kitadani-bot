@@ -16,6 +16,9 @@ KNOWLEDGE_PATH = os.path.join(os.path.dirname(__file__), '../knowledge/bonsai_al
 # ナレッジの読み込み
 with open(KNOWLEDGE_PATH, 'r', encoding='utf-8') as f:
     knowledge_chunks = json.load(f)
+    # 必ずリスト型に変換
+    if isinstance(knowledge_chunks, dict):
+        knowledge_chunks = list(knowledge_chunks.values())
 
 # FastAPIインスタンス作成
 app = FastAPI()
