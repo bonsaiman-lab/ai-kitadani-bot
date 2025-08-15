@@ -34,19 +34,20 @@ class AskRequest(BaseModel):
 
 class AskResponse(BaseModel):
     answer: str
-    matched_chunk: dict
+    matched_chunks: list
 
 @app.post("/ask", response_model=AskResponse)
 async def ask(request: AskRequest):
     try:
         # ユーザー質問のembedding生成
         question_embedding = get_embedding(request.question, OPENAI_API_KEY)
-        # 類似チャンク検索
-        best_chunk = search_knowledge(question_embedding, knowledge_chunks, OPENAI_API_KEY)
-        # 回答生成（シンプルにcontent返却。必要に応じて自然文生成も追加）
-        answer = best_chunk.get('content', '')
-        return AskResponse(answer=answer, matched_chunk=best_chunk)
+        # 類似チャンク検索（上位3件）
+        top_chunks = search_knowledge(question_embedding, knowledge_chunks, OPENAI_API_KEY, top_k=3)
+        # 回答生成（最もスコアが高いもののcontentを返す）
+        answer = top_chunks[0].get('content', '') if top_chunks else ''
+        return AskResponse(answer=answer, matched_chunks=top_chunks)
     except Exception as e:
         import traceback
         print("[ERROR] /ask endpoint exception:", traceback.format_exc())
-        return AskResponse(answer=f"エラーが発生しました: {str(e)}", matched_chunk={})
+        return AskResponse(answer=f"エラーが発生しました: {str(e)}", matched_chunks=[])
+
