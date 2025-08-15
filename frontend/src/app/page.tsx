@@ -55,7 +55,7 @@ export default function Home() {
       <form onSubmit={handleSubmit} className="w-full max-w-xl flex gap-2 mb-6">
         <input
           type="text"
-          className="flex-1 rounded border px-4 py-2 text-lg"
+          className="flex-1 rounded border px-4 py-2 text-lg text-green-900 placeholder-green-400"
           placeholder={placeholder}
           value={question}
           onChange={e => setQuestion(e.target.value)}
