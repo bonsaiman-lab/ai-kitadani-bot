@@ -32,8 +32,9 @@ def get_knowledge_embeddings(knowledge_chunks, api_key=None):
 def search_knowledge(question_embedding, knowledge_chunks, api_key=None, top_k=1):
     knowledge_embeddings = get_knowledge_embeddings(knowledge_chunks, api_key)
     sims = [cosine_similarity(question_embedding, emb) for emb in knowledge_embeddings]
-    best_idx = int(np.argmax(sims))
-    return knowledge_chunks[best_idx]
+    # 類似度の高い順にtop_k件のインデックスを取得
+    top_indices = np.argsort(sims)[::-1][:top_k]
+    return [knowledge_chunks[i] for i in top_indices]
 
 def cosine_similarity(a, b):
     return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
